@@ -27,6 +27,7 @@
 #include <string>
 #include <fstream>
 #include <algorithm>
+#include <sstream>
 
 using namespace std;
 
@@ -98,7 +99,9 @@ void HandleTCPClient(TCPSocket *sock) {
   std::ofstream of("latencies.txt");
   long long int sum = 0;
   for (std::vector<long long int>::iterator it = latencies.begin(); it != latencies.end(); it++){
-    std::string output = std::to_string(*it) + "\n";
+    std::stringstream ss;
+    ss << *it;
+    std::string output = ss.str() + "\n";
     of << output;
     sum += *it;
   }
