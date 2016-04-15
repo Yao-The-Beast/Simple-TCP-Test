@@ -87,7 +87,7 @@ void HandleTCPClient(TCPSocket *sock) {
       long long int currentTime = tv.tv_sec * 1000000 + tv.tv_usec;
       long long int latency = currentTime - sentTime;
       if (latency > 10000){
-        std::cout << "sentTime: " << sentTime <<  "; currentTime: " << currentTime << std::endl;
+        std::cout << "sentTime: " << receivedMessage <<  "; currentTime: " << currentTime << std::endl;
       }
       //std::cout << latency << std::endl;
       if (latencies.size() < 10000){
@@ -113,6 +113,7 @@ void HandleTCPClient(TCPSocket *sock) {
   std::sort(latencies.begin(), latencies.end());
   std::cout << "Median Latency is: " << latencies[latencies.size() / 2] << std::endl;
   std::cout << "Average Latency is: " << sum/latencies.size() << std::endl;
+  
   delete sock;
   exit(0);
 }
