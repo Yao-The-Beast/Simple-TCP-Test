@@ -96,7 +96,7 @@ void HandleTCPClient(TCPSocket *sock) {
   
   std::ofstream of("latencies.txt");
   long long int sum = 0;
-  for (auto it = latencies.begin(); it != latencies.end(); it++){
+  for (std::vector<long long int>::iterator it = latencies.begin(); it != latencies.end(); it++){
     std::string output = std::to_string(*it) + "\n";
     of << output;
     sum += *it;
