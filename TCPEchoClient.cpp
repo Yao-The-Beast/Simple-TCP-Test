@@ -47,6 +47,8 @@ int main(int argc, char *argv[]) {
       gettimeofday(&tv,NULL);
       long long int currentTime = tv.tv_sec * 1000000 + tv.tv_usec;
       sprintf(echoString, "%lld", currentTime);
+      if (currentTime == 0)
+        std::cout << "SHiT" << std::endl;
       sock.send(echoString, echoStringLen); 
       messagesSent++;
     }
