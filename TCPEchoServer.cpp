@@ -86,7 +86,7 @@ void HandleTCPClient(TCPSocket *sock) {
       long long int sentTime = atoll(echoBuffer);
       long long int currentTime = tv.tv_sec * 1000000 + tv.tv_usec;
       long long int latency = currentTime - sentTime;
-      if (latency > 10000){
+      if (latency > 100000){
         std::cout << "sentTime: " << receivedMessage <<  "; currentTime: " << currentTime << std::endl;
       }
       //std::cout << latency << std::endl;
