@@ -26,7 +26,7 @@
 
 using namespace std;
 
-const unsigned int MESSAGES = 10000;
+const unsigned int MESSAGES = 1000;
 
 int main(int argc, char *argv[]) {
 

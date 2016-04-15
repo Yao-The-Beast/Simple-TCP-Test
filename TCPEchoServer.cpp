@@ -31,7 +31,7 @@
 
 using namespace std;
 
-const unsigned int MESSAGES = 10000;
+const unsigned int MESSAGES = 1000;
 
 const unsigned int RCVBUFSIZE = 1024;    // Size of receive buffer
 
@@ -87,7 +87,7 @@ void HandleTCPClient(TCPSocket *sock) {
       long long int currentTime = tv.tv_sec * 1000000 + tv.tv_usec;
       long long int latency = currentTime - sentTime;
       if (latency > 100000){
-        std::cout << "sentTime: " << receivedMessage <<  "; currentTime: " << currentTime << std::endl;
+        std::cout << "sentTime: " << receivedMessage <<  "; currentTime: " << currentTime << " ID: " << messagesReceived << std::endl;
       }
       //std::cout << latency << std::endl;
       if (latencies.size() < 10000){
