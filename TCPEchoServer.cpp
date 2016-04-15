@@ -72,12 +72,12 @@ void HandleTCPClient(TCPSocket *sock) {
   cout << endl;
 
   // Send received string and receive again until the end of transmission
-  char echoBuffer[RCVBUFSIZE];
   int messagesReceived = 0;
   std::vector<long long int> latencies;
   
   struct timeval tv;
   while (messagesReceived < MESSAGES){
+    char echoBuffer[RCVBUFSIZE];
     int recvMsgSize = sock->recv(echoBuffer, RCVBUFSIZE);
     if (recvMsgSize > 0){
       gettimeofday(&tv, NULL);
