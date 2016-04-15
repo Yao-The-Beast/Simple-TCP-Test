@@ -30,8 +30,8 @@ const unsigned int MESSAGES = 1000;
 
 int main(int argc, char *argv[]) {
 
-  //string servAddress = "127.0.0.1"; 
-  string servAddress = "10.0.0.27";  
+  string servAddress = "127.0.0.1"; 
+  //string servAddress = "10.0.0.27";  
   int echoStringLen = 1024;   
   unsigned short echoServPort = 1111;
 
@@ -47,6 +47,7 @@ int main(int argc, char *argv[]) {
       long long int currentTime = tv.tv_sec * 1000000 + tv.tv_usec;
       char echoString[1024];
       sprintf(echoString, "%lld", currentTime);
+      //std::cout << echoString << std::endl;
       sock.send(echoString, echoStringLen); 
       messagesSent++;
     }
