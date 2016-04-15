@@ -31,19 +31,18 @@
 
 using namespace std;
 
-const unsigned int MESSAGES = 1000;
+const unsigned int MESSAGES = 100000;
 
 const unsigned int RCVBUFSIZE = 1024;    // Size of receive buffer
 
 void HandleTCPClient(TCPSocket *sock); // TCP client handling function
 
+unsigned short echoServPort = 1111;  // First arg: local port
+TCPServerSocket servSock(echoServPort);     // Server Socket object
+
 int main(int argc, char *argv[]) {
 
-  unsigned short echoServPort = 1111;  // First arg: local port
-
   try {
-    TCPServerSocket servSock(echoServPort);     // Server Socket object
-  
     for (;;) {   // Run forever
       HandleTCPClient(servSock.accept());       // Wait for a client to connect
     }
@@ -79,7 +78,7 @@ void HandleTCPClient(TCPSocket *sock) {
   while (messagesReceived < MESSAGES){
     char echoBuffer[RCVBUFSIZE];
     int recvMsgSize = sock->recv(echoBuffer, RCVBUFSIZE);
-    if (recvMsgSize > 0){
+    if (recvMsgSize == RCVBUFSIZE){
       gettimeofday(&tv, NULL);
       std::string receivedMessage(echoBuffer);
       //std::cout << receivedMessage << std::endl;
@@ -87,15 +86,15 @@ void HandleTCPClient(TCPSocket *sock) {
       long long int currentTime = tv.tv_sec * 1000000 + tv.tv_usec;
       long long int latency = currentTime - sentTime;
       if (latency > 100000){
-        std::cout << "sentTime: " << receivedMessage <<  "; currentTime: " << currentTime << " ID: " << messagesReceived << std::endl;
+        std::cout << "sentTime: " << echoBuffer <<  "; currentTime: " << currentTime << " ID: " << messagesReceived << std::endl;
       }
       //std::cout << latency << std::endl;
       if (latencies.size() < 10000){
         latencies.push_back(latency);
       }
       messagesReceived++;
-    }else{
-      std::cout << "ERROR: RECEIVED MSG SIZE LESS THAN ZERO" << std::endl;
+    }else if (recvMsgSize > 0){
+      std::cout << "SHIT " << recvMsgSize << std::endl;
     }
   }
   
@@ -114,6 +113,9 @@ void HandleTCPClient(TCPSocket *sock) {
   std::cout << "Median Latency is: " << latencies[latencies.size() / 2] << std::endl;
   std::cout << "Average Latency is: " << sum/latencies.size() << std::endl;
   
+  servSock.closeSocket();
+  
   delete sock;
+  
   exit(0);
 }

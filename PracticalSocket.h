@@ -204,6 +204,8 @@ public:
    */
   TCPSocket(const string &foreignAddress, unsigned short foreignPort) 
       throw(SocketException);
+      
+  void closeSocket();
 
 private:
   // Access for TCPServerSocket::accept() connection creation
@@ -246,6 +248,8 @@ public:
    *   @exception SocketException thrown if attempt to accept a new connection fails
    */
   TCPSocket *accept() throw(SocketException);
+
+  void closeSocket();
 
 private:
   void setListen(int queueLen) throw(SocketException);

@@ -249,6 +249,10 @@ TCPSocket::TCPSocket(const string &foreignAddress, unsigned short foreignPort)
 TCPSocket::TCPSocket(int newConnSD) : CommunicatingSocket(newConnSD) {
 }
 
+void TCPSocket::closeSocket(){
+  close(sockDesc);
+}
+
 // TCPServerSocket Code
 
 TCPServerSocket::TCPServerSocket(unsigned short localPort, int queueLen) 
@@ -271,6 +275,10 @@ TCPSocket *TCPServerSocket::accept() throw(SocketException) {
   }
 
   return new TCPSocket(newConnSD);
+}
+
+void TCPServerSocket::closeSocket(){
+  close(sockDesc);
 }
 
 void TCPServerSocket::setListen(int queueLen) throw(SocketException) {
