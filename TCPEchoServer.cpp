@@ -33,7 +33,7 @@ using namespace std;
 
 const unsigned int MESSAGES = 100000;
 
-const unsigned int RCVBUFSIZE = 1024;    // Size of receive buffer
+const unsigned int RCVBUFSIZE = 128;    // Size of receive buffer
 
 void HandleTCPClient(TCPSocket *sock); // TCP client handling function
 
