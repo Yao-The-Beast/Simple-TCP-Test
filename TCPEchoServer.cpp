@@ -31,7 +31,7 @@
 
 using namespace std;
 
-const unsigned int MESSAGES = 1000;
+const unsigned int MESSAGES = 10000;
 
 const unsigned int RCVBUFSIZE = 1024;    // Size of receive buffer
 
