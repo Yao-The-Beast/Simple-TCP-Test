@@ -30,7 +30,8 @@ const unsigned int MESSAGES = 10000;
 
 int main(int argc, char *argv[]) {
 
-  string servAddress = "127.0.0.1"; 
+  //string servAddress = "127.0.0.1"; 
+  string servAddress = "10.0.0.27";
   char echoString[1024];  
   int echoStringLen = 1024;   
   unsigned short echoServPort = 1111;
