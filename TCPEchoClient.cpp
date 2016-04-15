@@ -26,12 +26,12 @@
 
 using namespace std;
 
-const unsigned int MESSAGES = 10000;
+const unsigned int MESSAGES = 1000;
 
 int main(int argc, char *argv[]) {
 
-  string servAddress = "127.0.0.1"; 
-  //string servAddress = "10.0.0.27";
+  //string servAddress = "127.0.0.1"; 
+  string servAddress = "10.0.0.27";
   char echoString[1024];  
   int echoStringLen = 1024;   
   unsigned short echoServPort = 1111;
@@ -47,8 +47,7 @@ int main(int argc, char *argv[]) {
       gettimeofday(&tv,NULL);
       long long int currentTime = tv.tv_sec * 1000000 + tv.tv_usec;
       sprintf(echoString, "%lld", currentTime);
-      if (currentTime == 0)
-        std::cout << "SHiT" << std::endl;
+      std::cout << echoString << std::endl;
       sock.send(echoString, echoStringLen); 
       messagesSent++;
     }
