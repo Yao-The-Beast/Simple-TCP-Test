@@ -32,7 +32,7 @@
 
 using namespace std;
 
-const unsigned int MESSAGES = 100000;
+const unsigned int MESSAGES = 10000;
 const int NUM_THREADS = 5;
 pthread_t threads[NUM_THREADS];
 int connections = 0;
