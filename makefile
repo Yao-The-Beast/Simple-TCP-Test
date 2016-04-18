@@ -9,10 +9,10 @@ all: TCPEchoClient TCPEchoServer UDPEchoClient UDPEchoServer TCPEchoServer-Threa
 BroadcastSender BroadcastReceiver MulticastSender MulticastReceiver
 
 TCPEchoClient: TCPEchoClient.cpp PracticalSocket.cpp PracticalSocket.h
-	$(CXX) $(CXXFLAGS) -o TCPEchoClient TCPEchoClient.cpp PracticalSocket.cpp $(LIBS)
+	$(CXX) $(CXXFLAGS) -o TCPEchoClient TCPEchoClient.cpp PracticalSocket.cpp $(LIBS) -lpthread
 
 TCPEchoServer: TCPEchoServer.cpp PracticalSocket.cpp PracticalSocket.h
-	$(CXX) $(CXXFLAGS) -o TCPEchoServer TCPEchoServer.cpp PracticalSocket.cpp $(LIBS)
+	$(CXX) $(CXXFLAGS) -o TCPEchoServer TCPEchoServer.cpp PracticalSocket.cpp $(LIBS) -lpthread
 
 UDPEchoClient: UDPEchoClient.cpp PracticalSocket.cpp PracticalSocket.h
 	$(CXX) $(CXXFLAGS) -o UDPEchoClient UDPEchoClient.cpp PracticalSocket.cpp $(LIBS)
