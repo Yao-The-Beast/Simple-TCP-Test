@@ -35,7 +35,7 @@ const int NUM_THREADS = 5;
 void* worker(void* threadId){
   //string servAddress = "127.0.0.1"; 
   string servAddress = "10.0.0.27";  
-  int echoStringLen = 1024;   
+  int echoStringLen = 128;   
   unsigned short echoServPort = 1234;
 
   try {
@@ -47,11 +47,11 @@ void* worker(void* threadId){
     while (messagesSent < MESSAGES){
       gettimeofday(&tv,NULL);
       long long int currentTime = tv.tv_sec * 1000000 + tv.tv_usec;
-      char echoString[1024];
+      char echoString[128];
       sprintf(echoString, "%lld", currentTime);
       sock.send(echoString, echoStringLen); 
       messagesSent++;
-      usleep(50);
+      usleep(500);
     }
     sock.closeSocket();
   } catch(SocketException &e) {

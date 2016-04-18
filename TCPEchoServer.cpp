@@ -38,7 +38,7 @@ pthread_t threads[NUM_THREADS];
 int connections = 0;
 int id = 0;
 bool flag = true;
-const unsigned int RCVBUFSIZE = 1024;    // Size of receive buffer
+const unsigned int RCVBUFSIZE = 128;    // Size of receive buffer
 
 void HandleTCPClient(TCPSocket *sock); // TCP client handling function
 
