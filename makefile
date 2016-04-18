@@ -2,7 +2,7 @@ CXX = g++ -std=c++11
 CXXFLAGS = -Wall -ansi -pedantic -g
 
 ifeq ($(shell uname),SunOS)
-  LIBS = -lsocket -lnsl
+  LIBS = -lsocket -lnsl -pthread
 endif
 
 all: TCPEchoClient TCPEchoServer UDPEchoClient UDPEchoServer TCPEchoServer-Thread \

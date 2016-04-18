@@ -23,17 +23,20 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <pthread.h>
+
+
 
 using namespace std;
 
 const unsigned int MESSAGES = 100000;
+const int NUM_THREADS = 5;
 
-int main(int argc, char *argv[]) {
-
+void* worker(void* threadId){
   //string servAddress = "127.0.0.1"; 
   string servAddress = "10.0.0.27";  
-  int echoStringLen = 128;   
-  unsigned short echoServPort = 1111;
+  int echoStringLen = 1024;   
+  unsigned short echoServPort = 1234;
 
   try {
     // Establish connection with the echo server
@@ -41,25 +44,35 @@ int main(int argc, char *argv[]) {
   
     int messagesSent = 0;
     struct timeval tv;
-    std::cout << "BEGIN PUMPINT" << std::endl;
     while (messagesSent < MESSAGES){
       gettimeofday(&tv,NULL);
       long long int currentTime = tv.tv_sec * 1000000 + tv.tv_usec;
-      char echoString[128];
+      char echoString[1024];
       sprintf(echoString, "%lld", currentTime);
-      //std::cout << echoString << std::endl;
       sock.send(echoString, echoStringLen); 
       messagesSent++;
-      usleep(3);
+      usleep(50);
     }
     sock.closeSocket();
   } catch(SocketException &e) {
     cerr << e.what() << endl;
-    exit(-1);
+  }
+  std::cout << "!" << std::endl;
+  pthread_exit(NULL);
+}
+
+int main(int argc, char *argv[]) {
+  
+  pthread_t threads[NUM_THREADS];
+  for (int i =0; i < NUM_THREADS; i++){
+    int feedback = pthread_create(&threads[i], NULL, worker, (void *)i);
+    if (feedback != 0) 
+      cout << "error" ;
   }
   
-  
-  std::cout << "END PUMPING" << std::endl;
-
+  for (int i = 0; i < NUM_THREADS; i++){
+    pthread_join(threads[i],NULL);
+  }
+  std::cout << "END OF CLIENT" << std::endl;
   return 0;
 }
