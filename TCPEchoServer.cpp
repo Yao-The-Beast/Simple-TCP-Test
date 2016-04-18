@@ -33,7 +33,7 @@
 using namespace std;
 
 const unsigned int MESSAGES = 10000;
-const int NUM_THREADS = 5;
+const int NUM_THREADS = 128;
 pthread_t threads[NUM_THREADS];
 int connections = 0;
 int id = 0;

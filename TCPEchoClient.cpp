@@ -30,7 +30,7 @@
 using namespace std;
 
 const unsigned int MESSAGES = 10000;
-const int NUM_THREADS = 5;
+const int NUM_THREADS = 128;
 
 void* worker(void* threadId){
   //string servAddress = "127.0.0.1"; 
@@ -51,7 +51,7 @@ void* worker(void* threadId){
       sprintf(echoString, "%lld", currentTime);
       sock.send(echoString, echoStringLen); 
       messagesSent++;
-      usleep(500);
+      usleep(400);
     }
     sock.closeSocket();
   } catch(SocketException &e) {
